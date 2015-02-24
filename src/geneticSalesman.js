@@ -26,6 +26,12 @@ var geneticSalesman = function(genes, assessFitness, initiateBloodline, mutate, 
   //   }
   //   availableResources--;
   // }
+  // bloodlines.sort(function(bloodline1, bloodline2){
+  //   return assessFitness(bloodline1) - assessFitness(bloodline2);
+  // });
+
+  // var optimalRoute = bloodlines[0];
+  // return optimalRoute;
 
 // SOLUTION ENDS HERE 
   var alternateRoutes = [];
