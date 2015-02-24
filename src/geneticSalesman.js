@@ -1,12 +1,19 @@
 var geneticSalesman = function(genes, assessFitness, initiateBloodline, mutate, availableResources){
   var options = {
-    numberOfBloodlines: 10,
+    numberOfBloodlines: 1,
     offspringPerSurvivor: 50,
   };
-
-  /* -------------------- Complete me! -------------------- */
-
-  return optimalRoute;
+  var alternateRoutes = [];
+  for (var i = 0; i < options.offspringPerSurvivor - 1; i++) {
+    alternateRoutes.push(mutate(genes));
+  }
+  var winner = alternateRoutes.reduce(function(route1, route2){
+    return (assessFitness(route1) > assessFitness(route2) ? route1 : route2);
+  });
+  availableResources -= 1;
+  return (availableResources > 0 ?  
+          geneticSalesman(winner, assessFitness, initiateBloodline, mutate, availableResources) : 
+          winner);
 }
 
 var createRoute = function(cities){
@@ -20,9 +27,12 @@ var createRoute = function(cities){
 }
 
 var alterRoute = function(route){
-
-  /* -------------------- Complete me! -------------------- */
-
+  var newRoute = route.slice();
+  var firstIndex = Math.floor(Math.random() * route.length);
+  var secondIndex = Math.floor(Math.random() * route.length);
+  newRoute[firstIndex] = route[secondIndex];
+  newRoute[secondIndex] = route[firstIndex];
+  return newRoute;
 }
 
 var calculateDistance = function(route){
