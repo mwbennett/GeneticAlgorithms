@@ -3,12 +3,37 @@ var geneticSalesman = function(genes, assessFitness, initiateBloodline, mutate, 
     numberOfBloodlines: 1,
     offspringPerSurvivor: 50,
   };
+
+// SOLUTION STARTS HERE 
+  // var bloodlines = [];
+  // for (var i = 0; i < options.numberOfBloodlines; i++) {
+  //   bloodlines.push(initiateBloodline(genes));
+  // }
+
+  // while(availableResources) {
+  //   for (var i = 0; i < bloodlines.length; i++) {
+  //     var survivor = bloodlines[i];
+  //     var survivorFitness = assessFitness(survivor);
+  //     for (var offspring = 0; offspring < options.offspringPerSurvivor; offspring++){
+  //       var currentOffspring = mutate(bloodlines[i]);
+  //       var currentFitness = assessFitness(currentOffspring);
+  //       if (currentFitness < survivorFitness){
+  //         survivor = currentOffspring;
+  //         survivorFitness = currentFitness;
+  //       }
+  //     }
+  //     bloodlines[i] = survivor;
+  //   }
+  //   availableResources--;
+  // }
+
+// SOLUTION ENDS HERE 
   var alternateRoutes = [];
   for (var i = 0; i < options.offspringPerSurvivor - 1; i++) {
     alternateRoutes.push(mutate(genes));
   }
   var winner = alternateRoutes.reduce(function(route1, route2){
-    return (assessFitness(route1) > assessFitness(route2) ? route1 : route2);
+    return (assessFitness(route1) < assessFitness(route2) ? route1 : route2);
   });
   availableResources -= 1;
   return (availableResources > 0 ?  
